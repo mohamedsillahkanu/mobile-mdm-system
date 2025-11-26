@@ -1,0 +1,68 @@
+{
+  "name": "mobile-mdm-system",
+  "version": "1.0.0",
+  "description": "Mobile Device Management System for monitoring, controlling, and securing mobile devices with IMEI-based locking, app control, and policy enforcement",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8000 -o",
+    "dev": "http-server -p 8000",
+    "build:android": "cd cordova && cordova build android",
+    "build:android:release": "cd cordova && cordova build android --release",
+    "run:android": "cd cordova && cordova run android",
+    "setup:cordova": "npm install -g cordova && cd cordova && bash setup-android-app.sh",
+    "clean": "cd cordova && cordova clean",
+    "lint": "echo 'No linting configured'",
+    "test": "echo 'No tests configured'"
+  },
+  "keywords": [
+    "mdm",
+    "mobile-device-management",
+    "device-management",
+    "device-security",
+    "android",
+    "ios",
+    "cordova",
+    "imei-tracking",
+    "remote-lock",
+    "remote-wipe",
+    "app-control",
+    "policy-enforcement",
+    "geolocation",
+    "device-monitoring"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/mobile-mdm-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/mobile-mdm-system/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/mobile-mdm-system#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-battery-status": {},
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-dialogs": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-whitelist": {}
+    }
+  }
+}

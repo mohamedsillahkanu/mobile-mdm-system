@@ -1,0 +1,93 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Cordova
+platforms/
+plugins/
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+build/
+dist/
+release/
+
+# IDE and Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Security - NEVER commit these!
+*.keystore
+*.jks
+*.p12
+*.key
+*.pem
+*.mobileprovision
+release-signing.properties
+google-services.json
+GoogleService-Info.plist
+*.env
+.env.local
+.env.*.local
+secrets.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Coverage and testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Documentation builds
+docs/build/
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Production
+/www/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Cordova specific
+hooks/
+res/.pgbomit

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.yourcompany.mdm" version="1.0.0" 
+        xmlns="http://www.w3.org/ns/widgets" 
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    
+    <name>MDM System</name>
+    <description>
+        Mobile Device Management System for monitoring and controlling mobile devices
+    </description>
+    <author email="support@yourcompany.com" href="https://yourcompany.com">
+        Your Company Name
+    </author>
+    
+    <content src="index.html" />
+    
+    <!-- Allow all network requests -->
+    <access origin="*" />
+    
+    <!-- Allow navigation -->
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    
+    <!-- Platform-specific settings -->
+    <platform name="android">
+        <!-- Android-specific permissions -->
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <!-- Device information and IMEI -->
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+            
+            <!-- Location tracking -->
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+            
+            <!-- Network -->
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            
+            <!-- Device management -->
+            <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+            <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+            
+            <!-- Battery monitoring -->
+            <uses-permission android:name="android.permission.BATTERY_STATS" />
+            
+            <!-- Storage -->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            
+            <!-- Notifications -->
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+            
+            <!-- App management -->
+            <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+            <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+            
+            <!-- Camera control -->
+            <uses-permission android:name="android.permission.CAMERA" />
+            
+            <!-- Wake lock for background operations -->
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+        </config-file>
+        
+        <!-- App icons -->
+        <icon density="ldpi" src="res/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="res/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="res/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="res/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="res/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="res/android/icon/drawable-xxxhdpi-icon.png" />
+        
+        <!-- Splash screens -->
+        <splash density="land-ldpi" src="res/android/splash/drawable-land-ldpi-screen.png" />
+        <splash density="land-mdpi" src="res/android/splash/drawable-land-mdpi-screen.png" />
+        <splash density="land-hdpi" src="res/android/splash/drawable-land-hdpi-screen.png" />
+        <splash density="land-xhdpi" src="res/android/splash/drawable-land-xhdpi-screen.png" />
+        <splash density="land-xxhdpi" src="res/android/splash/drawable-land-xxhdpi-screen.png" />
+        <splash density="land-xxxhdpi" src="res/android/splash/drawable-land-xxxhdpi-screen.png" />
+        <splash density="port-ldpi" src="res/android/splash/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="res/android/splash/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="res/android/splash/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="res/android/splash/drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="res/android/splash/drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="res/android/splash/drawable-port-xxxhdpi-screen.png" />
+        
+        <!-- Android preferences -->
+        <preference name="AndroidLaunchMode" value="singleTop" />
+        <preference name="AndroidInsecureFileModeEnabled" value="false" />
+        <preference name="GradlePluginKotlinEnabled" value="true" />
+        <preference name="GradlePluginKotlinCodeStyle" value="official" />
+        <preference name="AndroidXEnabled" value="true" />
+        
+        <!-- Target SDK versions -->
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="33" />
+        <preference name="android-compileSdkVersion" value="33" />
+    </platform>
+    
+    <!-- Global preferences -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="local" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="Orientation" value="portrait" />
+    
+    <!-- Cordova plugins -->
+    <!-- Core plugins -->
+    <plugin name="cordova-plugin-device" spec="^2.1.0" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.1.0" />
+    <plugin name="cordova-plugin-network-information" spec="^3.0.0" />
+    <plugin name="cordova-plugin-battery-status" spec="^2.0.3" />
+    <plugin name="cordova-plugin-vibration" spec="^3.1.1" />
+    <plugin name="cordova-plugin-camera" spec="^6.0.0" />
+    <plugin name="cordova-plugin-file" spec="^7.0.0" />
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.2" />
+    
+    <!-- Additional useful plugins -->
+    <plugin name="cordova-plugin-statusbar" spec="^3.0.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="^6.0.0" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.5" />
+    
+    <!-- Custom plugins for MDM (you may need to create these) -->
+    <!-- <plugin name="cordova-plugin-app-list" spec="^1.0.0" /> -->
+    <!-- <plugin name="cordova-plugin-device-admin" spec="^1.0.0" /> -->
+    
+</widget>

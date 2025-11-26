@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Device Management System</title>
+    <link rel="stylesheet" href="css/mdm-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-mobile-alt"></i>
+            <span>MDM System</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <i class="fas fa-home"></i> Dashboard
+            </a></li>
+            <li><a href="#devices" class="nav-link" data-page="devices">
+                <i class="fas fa-mobile-alt"></i> Devices
+            </a></li>
+            <li><a href="#policies" class="nav-link" data-page="policies">
+                <i class="fas fa-shield-alt"></i> Policies
+            </a></li>
+            <li><a href="#app-control" class="nav-link" data-page="app-control">
+                <i class="fas fa-ban"></i> App Control
+            </a></li>
+            <li><a href="#alerts" class="nav-link" data-page="alerts">
+                <i class="fas fa-bell"></i> Alerts
+            </a></li>
+        </ul>
+        <div class="nav-user">
+            <i class="fas fa-user-circle"></i>
+            <span id="username">Admin</span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Dashboard Page -->
+        <div id="page-dashboard" class="page active">
+            <h1>Device Management Dashboard</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-devices">0</h3>
+                        <p>Total Devices</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="active-devices">0</h3>
+                        <p>Active Devices</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="locked-devices">0</h3>
+                        <p>Locked Devices</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="alert-count">0</h3>
+                        <p>Active Alerts</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="device-map">
+                    <h2>Device Location Map</h2>
+                    <div id="map-container" class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Map would show device locations here</p>
+                        <small>Integration with Google Maps/Leaflet for production</small>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div id="activity-list" class="activity-list">
+                        <!-- Activity items will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Devices Page -->
+        <div id="page-devices" class="page">
+            <div class="page-header">
+                <h1>Managed Devices</h1>
+                <button class="btn btn-primary" id="enroll-device-btn">
+                    <i class="fas fa-plus"></i> Enroll Device
+                </button>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-devices" class="search-input" placeholder="Search by name, IMEI, or model...">
+                <select id="status-filter" class="filter-select">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="locked">Locked</option>
+                    <option value="wiped">Wiped</option>
+                    <option value="pending">Pending</option>
+                </select>
+                <select id="os-filter" class="filter-select">
+                    <option value="">All OS</option>
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
+                </select>
+            </div>
+
+            <div class="devices-grid" id="devices-grid">
+                <!-- Device cards will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Policies Page -->
+        <div id="page-policies" class="page">
+            <div class="page-header">
+                <h1>Device Policies</h1>
+                <button class="btn btn-primary" id="create-policy-btn">
+                    <i class="fas fa-plus"></i> Create Policy
+                </button>
+            </div>
+
+            <div class="policies-container">
+                <div class="policy-card">
+                    <h3><i class="fas fa-lock"></i> Security Policies</h3>
+                    <div class="policy-list" id="security-policies">
+                        <!-- Security policies will be populated -->
+                    </div>
+                </div>
+
+                <div class="policy-card">
+                    <h3><i class="fas fa-wifi"></i> Network Policies</h3>
+                    <div class="policy-list" id="network-policies">
+                        <!-- Network policies will be populated -->
+                    </div>
+                </div>
+
+                <div class="policy-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Device Restrictions</h3>
+                    <div class="policy-list" id="device-restrictions">
+                        <!-- Device restrictions will be populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Control Page -->
+        <div id="page-app-control" class="page">
+            <div class="page-header">
+                <h1>Application Control</h1>
+                <button class="btn btn-primary" id="add-app-rule-btn">
+                    <i class="fas fa-plus"></i> Add App Rule
+                </button>
+            </div>
+
+            <div class="app-control-grid">
+                <div class="app-section">
+                    <h2>Blocked Applications</h2>
+                    <div id="blocked-apps" class="app-list">
+                        <!-- Blocked apps will be populated -->
+                    </div>
+                </div>
+
+                <div class="app-section">
+                    <h2>Allowed Applications</h2>
+                    <div id="allowed-apps" class="app-list">
+                        <!-- Allowed apps will be populated -->
+                    </div>
+                </div>
+
+                <div class="app-section">
+                    <h2>Monitored Applications</h2>
+                    <div id="monitored-apps" class="app-list">
+                        <!-- Monitored apps will be populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Page -->
+        <div id="page-alerts" class="page">
+            <h1>Security Alerts & Notifications</h1>
+            
+            <div class="alert-filters">
+                <select id="alert-severity-filter" class="filter-select">
+                    <option value="">All Severities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select id="alert-type-filter" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="security">Security</option>
+                    <option value="policy">Policy Violation</option>
+                    <option value="app">App Installation</option>
+                    <option value="location">Location</option>
+                </select>
+            </div>
+
+            <div id="alerts-list" class="alerts-list">
+                <!-- Alerts will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Enroll Device Modal -->
+    <div id="enroll-device-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Enroll New Device</h2>
+            <form id="enroll-device-form">
+                <div class="form-group">
+                    <label for="device-name">Device Name *</label>
+                    <input type="text" id="device-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="device-imei">IMEI Number *</label>
+                    <input type="text" id="device-imei" pattern="[0-9]{15}" maxlength="15" required>
+                    <small>15-digit IMEI number</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="device-model">Model</label>
+                        <input type="text" id="device-model">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="device-os">OS</label>
+                        <select id="device-os">
+                            <option value="Android">Android</option>
+                            <option value="iOS">iOS</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="device-owner">Owner Name</label>
+                        <input type="text" id="device-owner">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="device-phone">Phone Number</label>
+                        <input type="tel" id="device-phone">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="device-email">Email</label>
+                    <input type="email" id="device-email">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Enroll Device</button>
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Device Details Modal -->
+    <div id="device-details-modal" class="modal">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <h2 id="device-details-title">Device Details</h2>
+            <div id="device-details-content">
+                <!-- Device details will be populated -->
+            </div>
+            <div class="device-actions">
+                <button class="btn btn-danger" id="lock-device-btn">
+                    <i class="fas fa-lock"></i> Lock Device
+                </button>
+                <button class="btn btn-warning" id="locate-device-btn">
+                    <i class="fas fa-map-marker-alt"></i> Locate Device
+                </button>
+                <button class="btn btn-danger" id="wipe-device-btn">
+                    <i class="fas fa-trash"></i> Wipe Device
+                </button>
+                <button class="btn btn-secondary" id="unenroll-device-btn">
+                    <i class="fas fa-times"></i> Unenroll
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add App Rule Modal -->
+    <div id="app-rule-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Application Rule</h2>
+            <form id="app-rule-form">
+                <div class="form-group">
+                    <label for="app-name">Application Name *</label>
+                    <input type="text" id="app-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="app-package">Package Name *</label>
+                    <input type="text" id="app-package" required placeholder="com.example.app">
+                </div>
+                
+                <div class="form-group">
+                    <label for="app-action">Action *</label>
+                    <select id="app-action" required>
+                        <option value="block">Block</option>
+                        <option value="allow">Allow Only This</option>
+                        <option value="monitor">Monitor Usage</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="app-devices">Apply To</label>
+                    <select id="app-devices" multiple size="5">
+                        <!-- Devices will be populated -->
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Rule</button>
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Policy Modal -->
+    <div id="policy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Policy</h2>
+            <form id="policy-form">
+                <div class="form-group">
+                    <label for="policy-name">Policy Name *</label>
+                    <input type="text" id="policy-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="policy-type">Policy Type *</label>
+                    <select id="policy-type" required>
+                        <option value="security">Security</option>
+                        <option value="network">Network</option>
+                        <option value="restriction">Device Restriction</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="policy-description">Description</label>
+                    <textarea id="policy-description" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="policy-enforce">
+                        Enforce Immediately
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Policy</button>
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Confirmation Dialog -->
+    <div id="confirm-dialog" class="modal">
+        <div class="modal-content small">
+            <h3 id="confirm-title">Confirm Action</h3>
+            <p id="confirm-message"></p>
+            <div class="form-actions">
+                <button class="btn btn-danger" id="confirm-yes">Yes, Proceed</button>
+                <button class="btn btn-secondary" id="confirm-no">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/mdm-data.js"></script>
+    <script src="js/mdm-ui.js"></script>
+    <script src="js/mdm-app.js"></script>
+</body>
+</html>
